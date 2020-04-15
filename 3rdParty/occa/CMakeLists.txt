@@ -75,6 +75,6 @@ install(FILES ${PROJECT_BINARY_DIR}/occa/defines/compiledDefines.hpp DESTINATION
 add_subdirectory(src)
 add_subdirectory(bin)
 # add_subdirectory(tests)
-add_subdirectory(examples)
+#add_subdirectory(examples)
 
 install(DIRECTORY include/ DESTINATION include)
