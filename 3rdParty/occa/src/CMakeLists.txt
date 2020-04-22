@@ -32,6 +32,13 @@ IF (WITH_METAL)
   SET(LIBOCCA_LIBRARIES ${METAL_LIBRARY} ${CORE_SERVICES} ${APP_KIT} ${LIBOCCA_LIBRARIES})
 ENDIF()
 
-target_link_libraries(libocca ${LIBOCCA_LIBRARIES} )
+target_include_directories(libocca PUBLIC
+  ${PROJECT_SOURCE_DIR}/include
+  ${PROJECT_BINARY_DIR}
+)
+
+target_link_libraries(libocca PUBLIC ${LIBOCCA_LIBRARIES})
+#set_target_properties(libocca PROPERTIES PUBLIC_HEADER occa.hpp)
+
 
 install(TARGETS libocca DESTINATION lib )

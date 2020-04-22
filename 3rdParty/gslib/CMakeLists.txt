@@ -1,6 +1,4 @@
 project(gslib)
-# # #set(gslib VERSION 0.1)
-#add_subdirectory(src)
 
 set(gslib-src
   src/gs.c 
@@ -21,7 +19,24 @@ set(gslib-src
   src/findpts_el_2.c
 )
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DMPI -DUSEMPIIO -DUNDERSCORE -DGLOBAL_LONG_LONG")
 add_library(gs STATIC ${gslib-src})
+target_include_directories(gs PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+  $<INSTALL_INTERFACE:include> 
+)
+
 target_link_libraries(gs PUBLIC MPI::MPI_C)
-install(TARGETS gs DESTINATION lib)
+set_target_properties(gs PROPERTIES PUBLIC_HEADER src/gslib.h)
+
+target_compile_definitions(gs PUBLIC
+  "USEMPIIO"
+  "UNDERSCORE"
+  "GLOBAL_LONG_LONG"
+)
+
+install(TARGETS gs 
+  ARCHIVE
+    DESTINATION lib 
+  PUBLIC_HEADER
+    DESTINATION include
+)
