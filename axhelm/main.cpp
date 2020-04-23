@@ -28,12 +28,14 @@ SOFTWARE.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "omp.h"
 #include <unistd.h>
 #include "mpi.h"
+#ifdef _OPENMP
+  #include "omp.h"
+#endif
+
 #include "occa.hpp"
 #include "meshBasis.hpp"
-
 #include "kernelHelper.cpp"
 #include "axhelmReference.cpp"
 
@@ -115,10 +117,16 @@ int main(int argc, char **argv){
   }
   else{
     sprintf(deviceConfig, "mode: 'Serial' ");
+  #ifdef _OPENMP
     omp_set_num_threads(1);
+  #endif
   }
+  
+  int Nthreads = 0;
+#ifdef _OPENMP
+  Nthreads = omp_get_max_threads();
+#endif
 
-  int Nthreads =  omp_get_max_threads();
   std::string deviceConfigString(deviceConfig);
   device.setup(deviceConfigString);
   occa::env::OCCA_MEM_BYTE_ALIGN = USE_OCCA_MEM_BYTE_ALIGN;

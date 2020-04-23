@@ -24,9 +24,10 @@ SOFTWARE.
 
 */
 
-
-#include "omp.h"
 #include "mpi.h"
+#ifdef _OPENMP
+  #include "omp.h"
+#endif
 #include "mesh.h"
 
 int findBestPeriodicMatch(dfloat xper, dfloat yper, dfloat zper,
@@ -3082,7 +3083,9 @@ void occaDeviceConfig(mesh_t *mesh, setupAide &options){
   else{
     //sprintf(deviceConfig, "mode: 'Serial', memory: { use_host_pointer: true }");
     sprintf(deviceConfig, "mode: 'Serial' ");
+  #ifdef _OPENMP  
     omp_set_num_threads(1);
+  #endif
   }
 
   mesh->device.setup((std::string)deviceConfig);

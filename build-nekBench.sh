@@ -1,11 +1,11 @@
 #!/bin/bash
-CC=gcc
+CC=mpicc
 CFLAGS=
 
-CXX=g++
+CXX=mpicxx
 CXXFLAGS=
 
-FC=gfortran
+FC=mpifort
 FFLAGS=
 
 MPICC=mpicc

@@ -19,6 +19,7 @@ set(gslib-src
   src/findpts_el_2.c
 )
 
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DMPI")
 add_library(gs STATIC ${gslib-src})
 target_include_directories(gs PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
@@ -27,11 +28,13 @@ target_include_directories(gs PUBLIC
 
 target_link_libraries(gs PUBLIC MPI::MPI_C)
 set_target_properties(gs PROPERTIES PUBLIC_HEADER src/gslib.h)
+set_target_properties(gs PROPERTIES PUBLIC_HEADER src/tensor.h)
 
 target_compile_definitions(gs PUBLIC
   "USEMPIIO"
   "UNDERSCORE"
   "GLOBAL_LONG_LONG"
+  "USE_NAIVE_BLAS"
 )
 
 install(TARGETS gs 
