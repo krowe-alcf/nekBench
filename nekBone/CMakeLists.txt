@@ -23,6 +23,6 @@ target_link_libraries(nekBone PUBLIC
 
 target_compile_definitions(nekBone PUBLIC "DBP=\"./\"")
 
-install(TARGETS nekBone RUNTIME DESTINATION "./")
+install(TARGETS nekBone RUNTIME DESTINATION bin)
 install(DIRECTORY kernel/ DESTINATION kernel)
 install(FILES "setup.ini" DESTINATION "./" RENAME "nekBone.ini")

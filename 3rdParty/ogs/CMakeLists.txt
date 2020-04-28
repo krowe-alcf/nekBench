@@ -36,10 +36,3 @@ target_compile_definitions(ogs PUBLIC
   "USE_NEW_PINNED_MALLOC=1"
   "DOGS=\"${PROJECT_SOURCE_DIR}\""
 )
-
-install(TARGETS ogs
-  ARCHIVE
-    DESTINATION lib
-  PUBLIC_HEADER
-    DESTINATION include
-)

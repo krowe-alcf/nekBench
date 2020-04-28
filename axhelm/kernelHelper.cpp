@@ -31,7 +31,6 @@ static occa::kernel loadAxKernel(occa::device device, const std::string threadMo
   props["defines/dfloat"] = dfloatString;
   props["defines/dlong"]  = dlongString;
 
-  props["okl"] = false;
 
   occa::kernel axKernel;
 
@@ -39,14 +38,16 @@ static occa::kernel loadAxKernel(occa::device device, const std::string threadMo
   for (int r=0;r<2;r++){
     if ((r==0 && rank==0) || (r==1 && rank>0)) {
       if(strstr(threadModel.c_str(), "NATIVE+CUDA")){
+        props["okl"] = false;
         axKernel = device.buildKernel(filename + ".cu", kernelName, props);
         axKernel.setRunDims(Nelements, Nq*Nq);
       } else if(strstr(threadModel.c_str(), "NATIVE+SERIAL") || 
                 strstr(threadModel.c_str(), "NATIVE+OPENMP")){
+        props["okl"] = false;
         props["defines/USE_OCCA_MEM_BYTE_ALIGN"] = USE_OCCA_MEM_BYTE_ALIGN;
         axKernel = device.buildKernel(filename + ".c", kernelName, props);
       } else { // fallback is okl
-        props["okl"] = true;
+        //props["okl/enabled"] = true;
         axKernel = device.buildKernel(filename + ".okl", kernelName, props);
       }
     }

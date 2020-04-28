@@ -38,7 +38,5 @@ target_include_directories(libocca PUBLIC
 )
 
 target_link_libraries(libocca PUBLIC ${LIBOCCA_LIBRARIES})
-#set_target_properties(libocca PROPERTIES PUBLIC_HEADER occa.hpp)
-
 
 install(TARGETS libocca DESTINATION lib )

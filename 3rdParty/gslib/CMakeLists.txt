@@ -36,10 +36,3 @@ target_compile_definitions(gs PUBLIC
   "GLOBAL_LONG_LONG"
   "USE_NAIVE_BLAS"
 )
-
-install(TARGETS gs 
-  ARCHIVE
-    DESTINATION lib 
-  PUBLIC_HEADER
-    DESTINATION include
-)
