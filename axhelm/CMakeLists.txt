@@ -10,5 +10,5 @@ target_link_libraries(axhelm PUBLIC
   ${LAPACK_LIBRARIES}
 )
 
-install(TARGETS axhelm RUNTIME DESTINATION bin)
+install(TARGETS axhelm RUNTIME DESTINATION ".")
 install(DIRECTORY kernel/ DESTINATION kernel)

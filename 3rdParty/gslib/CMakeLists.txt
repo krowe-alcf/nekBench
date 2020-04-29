@@ -28,7 +28,6 @@ target_include_directories(gs PUBLIC
 
 target_link_libraries(gs PUBLIC MPI::MPI_C)
 set_target_properties(gs PROPERTIES PUBLIC_HEADER src/gslib.h)
-set_target_properties(gs PROPERTIES PUBLIC_HEADER src/tensor.h)
 
 target_compile_definitions(gs PUBLIC
   "USEMPIIO"

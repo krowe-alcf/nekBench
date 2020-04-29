@@ -1,5 +1,5 @@
 #If OCCA wasn't found, then build it now.
-#add_subdirectory(occa)
+add_subdirectory(occa)
 
 #If BLAS/LAPACK wasn't found, then build it now.
 #...
